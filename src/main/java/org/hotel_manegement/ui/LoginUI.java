@@ -59,8 +59,8 @@ public class LoginUI extends JFrame {
             }
         }));
 //basic properties
-        frame.setLayout(null);
-        frame.setSize(1000,1500);
+        frame.setLayout(new GridLayout(3,1,15,15));
+        frame.setSize(1500,1000);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

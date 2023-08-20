@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.List;
 
 public class RoomDAO extends BaseDAO implements ICrud<Room>{
@@ -78,5 +79,35 @@ public class RoomDAO extends BaseDAO implements ICrud<Room>{
                 throw new RuntimeException();
             }
         }
+        public List<Room> getByCategory(String category){
+        try {
+            PreparedStatement ps = conn.prepareStatement("select * from room where room_category like '%" + category + "%'");
+            ResultSet rs=ps.executeQuery();
+            return roomMapper.getResultList(rs);
+        }
+        catch (Exception e){
+            throw new RuntimeException(e);
+        }
+
+        }
+    public List<Room> getAllAvailableRoom(Integer id, LocalDate arrival, LocalDate departure) {
+        try {
+            String get_all = "SELECT * FROM room\n" +
+                    "WHERE hotel_id = ? and id NOT IN \n" +
+                    "                    (select r_id FROM booking\n" +
+                    "                    where arrival_date BETWEEN ? AND ? OR  departure_date BETWEEN ? AND ?)";
+            PreparedStatement ps = conn.prepareStatement(get_all);
+            ps.setInt(1, id);
+            ps.setString(2, String.valueOf(arrival));
+            ps.setString(3, String.valueOf(departure));
+            ps.setString(4, String.valueOf(arrival));
+            ps.setString(5, String.valueOf(departure));
+
+            ResultSet rs = ps.executeQuery();
+            return roomMapper.getResultList(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     }

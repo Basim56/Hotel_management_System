@@ -16,6 +16,7 @@ public class BookingMapper implements IMapper<Booking> {
     private static final String DEPARTURE_DATE="departure_date";
     private static final String BOOKING_DATE="booking_date";
     private static final String PRICE="price";
+    private static final String STATUS="status";
 
 
     @Override
@@ -29,8 +30,8 @@ public class BookingMapper implements IMapper<Booking> {
                     .customer_id(rs.getInt(CUSTOMER_ID))
                     .arrival_date(rs.getString(ARRIVAL_DATE))
                     .departure_date(rs.getString(DEPARTURE_DATE))
-                    .booking_date(rs.getString(BOOKING_DATE))
                     .price(rs.getInt(PRICE))
+                    .b_status(rs.getString(STATUS))
                     .build();
             bookingList.add(booking);
         }
@@ -47,8 +48,8 @@ public class BookingMapper implements IMapper<Booking> {
                     .customer_id(rs.getInt(CUSTOMER_ID))
                     .arrival_date(rs.getString(ARRIVAL_DATE))
                     .departure_date(rs.getString(DEPARTURE_DATE))
-                    .booking_date(rs.getString(BOOKING_DATE))
                     .price(rs.getInt(PRICE))
+                    .b_status(rs.getString(STATUS))
                     .build();
         }
         return null;

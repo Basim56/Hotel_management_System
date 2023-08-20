@@ -11,7 +11,7 @@ import java.util.List;
 
 public class HotelMapper implements IMapper<Hotel>{
     private static final String ID="id";
-    private static final String NAME="name";
+    private static final String NAME="hotel_name";
     private static final String LOCATION="location";
     private static final String URL="url";
     private static final String ADMIN_ID="admin_id";

@@ -2,9 +2,11 @@ package org.hotel_manegement.dao;
 import static org.hotel_manegement.dao.SQLQueryConstants.*;
 import org.hotel_manegement.Mapper.Admin_Mapper;
 import org.hotel_manegement.domain.Admin;
+import org.hotel_manegement.domain.Customer;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
@@ -57,7 +59,9 @@ Admin_Mapper adminMapper=new Admin_Mapper();
             PreparedStatement ps = conn.prepareStatement(UPDATE_ADMIN);
             ps.setString(1,obj.getFirst_name());
             ps.setString(2,obj.getLast_name());
-            ps.setInt(3,id.intValue());
+            ps.setString(3,obj.getEmail());
+            ps.setString(4,obj.getPassword());
+            ps.setInt(5,id.intValue());
             ps.executeUpdate();
         }
         catch (Exception e){
@@ -86,6 +90,17 @@ Admin_Mapper adminMapper=new Admin_Mapper();
             return adminMapper.getResultobject(rs);
         }
         catch (Exception e){
+            throw new RuntimeException(e);
+        }
+    }
+    public List<Admin> getByName(String name) {
+
+        try {
+            PreparedStatement ps = conn.prepareStatement("select * from hotel_admin where first_name like '%"+name+"%'");
+            ResultSet rs=ps.executeQuery();
+            return adminMapper.getResultList(rs);
+        }
+        catch (SQLException e){
             throw new RuntimeException(e);
         }
     }

@@ -21,7 +21,7 @@ public class HotelDAO extends BaseDAO implements ICrud<Hotel> {
             ps.setString(1, obj.getHotel_name());
             ps.setString(2, obj.getLocation());
             ps.setString(3, obj.getUrl());
-            ps.setLong(4, obj.getId());
+            ps.setLong(4, obj.getAdmin_id());
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -80,6 +80,16 @@ public class HotelDAO extends BaseDAO implements ICrud<Hotel> {
         }
         catch (Exception e){
             throw new RuntimeException();
+        }
+    }
+    public List<Hotel> getHotelByName(String name) {
+        try {
+            PreparedStatement ps = conn.prepareStatement("select * from hotel where hotel_name like '%"+name+"%'");
+            ResultSet rs=ps.executeQuery();
+            return hotelMapper.getResultList(rs);
+        }
+        catch (Exception e){
+            throw  new RuntimeException(e);
         }
     }
     }

@@ -14,8 +14,8 @@ public class Booking {
     private int customer_id;
     private String arrival_date;
     private String departure_date;
-    private String booking_date;
     private double price;
+    private String b_status;
 
 
 }

@@ -14,15 +14,23 @@ public class HomeUI {
                 JButton customer = new JButton("Customer");
                 JButton room = new JButton("Room");
                 JButton booking = new JButton("Booking");
+                JButton report=new JButton("Reports");
+                admin.setPreferredSize(new Dimension(350,150));
+                hotel.setPreferredSize(new Dimension(350,150));
+                customer.setPreferredSize(new Dimension(350,150));
+                room.setPreferredSize(new Dimension(350,150));
+                booking.setPreferredSize(new Dimension(350,150));
+                report.setPreferredSize(new Dimension(350,150));
 
 
-                frame.setLayout(new BorderLayout());
+                frame.setLayout(new GridLayout(2,3,25,25));
+                panel.setLayout(new FlowLayout(FlowLayout.CENTER));
                 panel.add(admin);
                 panel.add(hotel);
                 panel.add(customer);
                 panel.add(room);
                 panel.add(booking);
-                panel.setLayout(new FlowLayout(FlowLayout.CENTER,25,25));
+                panel.add(report);
                 admin.addActionListener((e)->{
                     frame.dispose();
                     new AdminUI();
@@ -43,8 +51,12 @@ public class HomeUI {
                     frame.dispose();
                     new BookingUI();
                 });
-                frame.add(panel,BorderLayout.NORTH);
-                frame.setSize(500,500);
+                report.addActionListener(e->{
+                    frame.dispose();
+                    new ReportUI();
+                });
+                frame.add(panel);
+                frame.setSize(1500,1000);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

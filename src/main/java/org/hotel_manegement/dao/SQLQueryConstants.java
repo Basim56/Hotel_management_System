@@ -4,21 +4,20 @@ public class SQLQueryConstants {
     public static final String GET_ALL_CUSTOMERS ="select * from customer";
     public static final String CREATE_CUSTOMER="insert into customer(customer_name,phone_number,cnic) values(?,?,?)";
     public static final String GET_CUSTOMER_BY_ID="select * from customer where id = ?";
-    public static final String UPDATE_CUSTOMER="update customer set customer_name=? where id=?";
+    public static final String UPDATE_CUSTOMER="update customer set customer_name=?,phone_number=?,cnic=? where id=?";
 
     public static final String DELETE_CUSTOMER="delete from customer where id=?";
     public static final String GET_ALL_ADMINS ="select * from hotel_admin";
     public static final String CREATE_ADMIN="insert into hotel_admin(first_name,last_name,email,admin_password) values(?,?,?,?)";
-    public static final String GET_ADMIN_BY_ID="select * from admin where id=?";
-    public static final String UPDATE_ADMIN="update hotel_admin set first_name=?,last_name=? where id =?";
+    public static final String GET_ADMIN_BY_ID="select * from hotel_admin where id=?";
+    public static final String UPDATE_ADMIN="update hotel_admin set first_name=?,last_name=?,email=?,admin_password=? where id=?";
     public static final String DELETE_ADMIN="delete from hotel_admin where id = ? ";
     public static final String GET_ALL_BOOKINGS="select * from booking";
-    public static final String CREATE_BOOKING="insert into booking(h_id,r_id,c_id,arrival_date,departure_date,booking_date,price) values" +
+    public static final String CREATE_BOOKING="insert into booking(h_id,r_id,c_id,arrival_date,departure_date,price,status) values" +
             "(?,?,?,?,?,?,?)";
     public static final String GET_BOOKING_BY_ID="select * from booking where id =?";
-    public static final String UPDATE_BOOKING="update booking \n" +
-            "set h_id=?,r_id=?,c_id=? where b_id=?";
-    public static final String DELETE_BOOKING="delete from booking where id = ?";
+    public static final String UPDATE_BOOKING="update booking set h_id=?,r_id=?,c_id=?,arrival_date=?,departure_date=?,price=?,status=? where b_id=?";
+    public static final String DELETE_BOOKING="delete from booking where b_id = ?";
 
     public static final String GET_ALL_HOTELS="select * from hotel";
     public static final String GET_HOTEL_BY_ID="select * from hotel where id=?";
@@ -31,6 +30,15 @@ public class SQLQueryConstants {
     public static final String UPDATE_ROOM="update room set category=?,room_floor=? where id=?";
     public static final String DELETE_ROOM="delete from room where id=?";
     public static final String ADMIN_AUTHENTICATION="select * from hotel_admin where email = ? AND admin_password= ?";
+    public static final String GET_CUSTOMER_BY_NAME="select * from customer where customer_name = ?";
+    public static final String GET_ALL_NAME="select h.hotel_name,r.room_category,c.customer_name from booking b \n" +
+            "join customer c on b.c_id=c.id \n" +
+            "join room r on b.r_id=r.id\n" +
+            "join hotel h on b.h_id=h.id\n" +
+            "where b.h_id=? and b.r_id=? and b.c_id=?";
+
+
+
 
 
 

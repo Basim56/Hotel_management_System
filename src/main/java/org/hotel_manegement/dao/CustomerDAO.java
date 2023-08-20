@@ -60,7 +60,9 @@ public class CustomerDAO extends BaseDAO implements ICrud<Customer>{
         try {
             PreparedStatement ps = conn.prepareStatement(UPDATE_CUSTOMER);
             ps.setString(1,obj.getName());
-            ps.setLong(2,id.intValue());
+            ps.setString(2,obj.getPhone_number());
+            ps.setString(3,obj.getCnic());
+            ps.setLong(4,id.intValue());
             ps.executeUpdate();
 
         }
@@ -73,7 +75,7 @@ public class CustomerDAO extends BaseDAO implements ICrud<Customer>{
     public void deleteById(Long id) {
         try {
             PreparedStatement pd = conn.prepareStatement(DELETE_CUSTOMER);
-            pd.setLong(1,id.intValue());
+            pd.setInt(1,id.intValue());
             pd.executeUpdate();
         }
         catch (Exception e){
@@ -81,5 +83,16 @@ public class CustomerDAO extends BaseDAO implements ICrud<Customer>{
         }
 
 
+    }
+    public List<Customer> getByName(String name) {
+
+        try {
+            PreparedStatement ps = conn.prepareStatement("select * from customer where customer_name like '%"+name+"%';");
+            ResultSet rs=ps.executeQuery();
+            return customerMapper.getResultList(rs);
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
     }
 }
