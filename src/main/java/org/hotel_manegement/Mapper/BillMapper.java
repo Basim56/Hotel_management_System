@@ -14,7 +14,7 @@ public class BillMapper implements IMapper<Bill>{
         List<Bill> bills=new ArrayList<>();
         while (rs.next()){
             Bill bill= Bill.builder()
-                    .totalprice(Integer.valueOf("This is total Price"))
+                    .totalprice(rs.getInt("total_price"))
                     .build();
             bills.add(bill);
         }

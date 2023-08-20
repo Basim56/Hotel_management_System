@@ -106,7 +106,7 @@ public class BookingDAO extends BaseDAO implements ICrud<Booking>{
             throw new RuntimeException(ex);
         }
     }
-    public List<Booking> getHotels(String arrival, String departure,Integer id){
+    public List<Booking> getMonthlyReport(String arrival, String departure,Integer id){
         try {
             PreparedStatement ps = conn.prepareStatement("select * from booking where arrival_date between '"+arrival+"' and '"+departure+"' and h_id="+id+";");
             ResultSet rs=ps.executeQuery();

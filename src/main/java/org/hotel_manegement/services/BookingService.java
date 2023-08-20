@@ -4,10 +4,7 @@ import org.hotel_manegement.dao.BookingDAO;
 import org.hotel_manegement.dao.CustomerDAO;
 import org.hotel_manegement.dao.HotelDAO;
 import org.hotel_manegement.dao.RoomDAO;
-import org.hotel_manegement.domain.Booking;
-import org.hotel_manegement.domain.Customer;
-import org.hotel_manegement.domain.Hotel;
-import org.hotel_manegement.domain.Room;
+import org.hotel_manegement.domain.*;
 
 import javax.xml.crypto.Data;
 import java.sql.SQLException;
@@ -144,6 +141,19 @@ public class BookingService {
         }
 
         return data;
+    }
+    public String[][] MonthlyReportBooking(String adate, String ddate, Integer id){
+        List<Booking> bookingList = dao.getMonthlyReport(adate, ddate, id);
+        return transformtoJtable(bookingList, 8);
+    }
+    public String getTotalPrice(String adate, String ddate, Integer h_id){
+        List<Bill> bookingList = dao.getTotalPrice( adate, ddate,h_id);
+
+        Integer price = bookingList.get(0).getTotalprice();
+        HotelDAO hotelDAO  = new HotelDAO();
+        Hotel hotel = hotelDAO.getById(Long.valueOf(h_id));
+
+        return "The  total  bill  of  Hotel   : "+hotel.getHotel_name()+"  is  "+price;
     }
 
 }
